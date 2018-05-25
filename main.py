@@ -125,7 +125,30 @@ measured=Split_test_data_y.reshape(800*400)
 predicted=predict.reshape(800*400)
 
 Loss_keras=np.power(measured-predicted,2)
-plt.plot(Loss_keras)
+mean_window = 1000
+Loss_keras_processed = Loss_keras[0:Loss_keras.size-mean_window]
+
+# smoothen anomaly score
+for x in range(Loss_keras.size-mean_window):
+    Loss_keras_processed[x] = np.mean(Loss_keras[x:x+mean_window])
+#normalize
+Loss_keras_processed = Loss_keras_processed/(np.std(Loss_keras_processed))
+    
+# plot results
+fig = plt.figure()
+plt.xlabel("sample")
+plt.ylabel("anomal score")
+plt.plot(Loss_keras_processed, label='32FP results')
+plt.legend()
+plt.show()
+
+fig2 = plt.figure()
+plt.xlabel("sample")
+plt.ylabel("value")
+plt.plot(predicted[155500:165000], label='predicts')
+plt.plot(measured[155500:165000], label='measured')
+plt.legend()
+plt.show()
 
 model.save("anormaly_FC.h5")
 print("Saved model to disk")
