@@ -18,7 +18,7 @@ from numpy .random import multivariate_normal, permutation
 parser = argparse.ArgumentParser()
 parser.add_argument('--epoch', '-e', default=10, type=int,
                     help='number of epochs to learn')
-parser.add_argument('--batchsize', '-b', type=int, default=64,
+parser.add_argument('--batchsize', '-b', type=int, default=128,
                     help='learning minibatch size')
 parser.add_argument('--train_file_name', '-train_name', type=str, default='./normal.csv',
                     help='the file name of the training data set') 
@@ -26,6 +26,7 @@ parser.add_argument('--test_file_name', '-test_name', type=str, default='./abn.c
                     help='the file name of the test data set')
 parser.add_argument('--window_size', '-ws', type=int, default=400,
                     help='window size')
+parser.add_argument('--output_file_name', default='log')
 parser.set_defaults(test=False)
                     
 args = parser.parse_args()
@@ -36,7 +37,7 @@ train_name=args.train_file_name
 test_name=args.test_file_name
 D=args.window_size #the size of the window width 
 batchsize = args.batchsize   # minibatch size
-n_epoch=args.epoch
+epoch=args.epoch
 
 # load
 x_train_data=np.loadtxt(train_name,delimiter=',')
@@ -53,13 +54,13 @@ x_test_data=x_test_data.reshape([x_test_data.shape[0],x_test_data.size/x_test_da
 Split_train_data=x_train_data.reshape([x_train_data.shape[0]/D,x_train_data.shape[1]*D])
 Split_test_data=x_test_data.reshape([x_test_data.shape[0]/D,x_test_data.shape[1]*D])
 
-Split_train_data=Split_train_data[0:-1,:]
-#Split_train_data_y=Split_train_data[1::,:]
+Split_train_data_x=Split_train_data[0:-1,:]
+Split_train_data_y=Split_train_data[1::,:]
 
-Split_test_data=Split_test_data[0:-1,:]
-#Split_test_data_y=Split_test_data[1::,:]
+Split_test_data_x=Split_test_data[0:-1,:]
+Split_test_data_y=Split_test_data[1::,:]
 
-img_rows=400
+img_rows = D
 Split_test_data = Split_test_data.reshape(Split_test_data.shape[0], img_rows, 1 , 1)
 Split_train_data = Split_train_data.reshape(Split_train_data.shape[0], img_rows, 1 , 1)
 Split_test_data_y = Split_test_data.reshape(Split_test_data.shape[0], img_rows)
@@ -70,7 +71,6 @@ input_shape = (img_rows, 1, 1)
 #Model Net
 #size of parameters
 batch_size = 64
-epochs = 50
 D=400
 dr=0.125 
 
@@ -81,12 +81,10 @@ model.add(Flatten(input_shape=input_shape)) #0
 model.add(Dense(252)) #1
 model.add(Activation('relu')) #2
 model.add(Dropout(dr))
-#model.add(GaussianNoise(1))
 #Fully connected 2nd layer
 model.add(Dense(int(152))) #4
 model.add(Activation('relu')) #5
 model.add(Dropout(dr))
-#model.add(GaussianNoise(1))
 #Fully connected 3rd layer
 model.add(Dense(int(152))) #7
 model.add(Activation('relu')) #8
@@ -99,18 +97,14 @@ model.add(Dropout(dr))
 model.add(Dense(int(152))) #7
 model.add(Activation('relu')) #8
 model.add(Dropout(dr))
-#model.add(GaussianNoise(1))
 #Fully connected 4th layer
 model.add(Dense(int(252))) #10
 model.add(Activation('relu')) #113
 model.add(Dropout(dr))
-#model.add(GaussianNoise(1))
 #Fully connected 4th layer
 model.add(Dense(352)) #10
 model.add(Activation('relu')) #11
 model.add(Dropout(dr))
-#model.add(GaussianNoise(1))
-
 #Fully connected final(5th layer)
 model.add(Dense(img_rows)) #19
 model.add(Dropout(dr))
@@ -121,18 +115,17 @@ model.summary()
 
 history = model.fit(Split_train_data, Split_train_data_y,
           batch_size=batch_size,
-          epochs=epochs,
+          epochs=epoch,
           verbose=1,
           validation_data=(Split_train_data, Split_train_data_y))
 
 predict=model.predict(Split_test_data)
 
-measured=Split_test_data_y.reshape(99*400)
-predicted=predict.reshape(99*400)
+measured=Split_test_data_y.reshape(800*400)
+predicted=predict.reshape(800*400)
 
 Loss_keras=np.power(measured-predicted,2)
 plt.plot(Loss_keras)
 
 model.save("anormaly_FC.h5")
 print("Saved model to disk")
-#score = model.evaluate(Split_test_data_x, Split_test_data_y, verbose=0)
