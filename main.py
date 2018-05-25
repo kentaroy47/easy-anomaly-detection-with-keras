@@ -109,7 +109,7 @@ model.add(Dropout(dr))
 model.add(Dense(img_rows)) #19
 model.add(Dropout(dr))
 
-model.compile(loss=keras.losses.mean_squared_error, optimizer='adam')
+model.compile(loss=keras.losses.mean_squared_error, optimizer='rmsprop')
 
 model.summary()
 
@@ -135,20 +135,20 @@ for x in range(Loss_keras.size-mean_window):
 Loss_keras_processed = Loss_keras_processed/(np.std(Loss_keras_processed))
     
 # plot results
-fig = plt.figure()
+fig1 = plt.figure()
 plt.xlabel("sample")
 plt.ylabel("anomal score")
 plt.plot(Loss_keras_processed, label='32FP results')
 plt.legend()
 plt.show()
 
-fig2 = plt.figure()
-plt.xlabel("sample")
-plt.ylabel("value")
-plt.plot(predicted[155500:165000], label='predicts')
-plt.plot(measured[155500:165000], label='measured')
-plt.legend()
-plt.show()
+#fig2 = plt.figure()
+#plt.xlabel("sample")
+#plt.ylabel("value")
+#plt.plot(predicted[155500:165000], label='predicts')
+#plt.plot(measured[155500:165000], label='measured')
+#plt.legend()
+#plt.show()
 
 model.save("anormaly_FC.h5")
 print("Saved model to disk")
