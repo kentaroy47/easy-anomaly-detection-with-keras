@@ -7,7 +7,7 @@ import copy
 import matplotlib.pylab as plt
 import keras
 from keras.models import Sequential, Model
-from keras.layers import Dense, Dropout, Flatten, Activation, LSTM
+from keras.layers import Dense, Dropout, Flatten, Activation, GRU
 from keras import backend as K
 from keras.callbacks import ModelCheckpoint
 import numpy as np
@@ -59,8 +59,8 @@ Split_test_data_x=Split_test_data[0:-1,:]
 Split_test_data_y=Split_test_data[1::,:]
 
 img_rows = D
-Split_test_data = Split_test_data.reshape(Split_test_data.shape[0], img_rows, 1 )
-Split_train_data = Split_train_data.reshape(Split_train_data.shape[0], img_rows, 1 )
+Split_test_data = Split_test_data.reshape(Split_test_data.shape[0], img_rows, 1)
+Split_train_data = Split_train_data.reshape(Split_train_data.shape[0], img_rows, 1)
 Split_test_data_y = Split_test_data.reshape(Split_test_data.shape[0], img_rows)
 Split_train_data_y = Split_train_data.reshape(Split_train_data.shape[0], img_rows)
 
@@ -75,16 +75,7 @@ dr=0.125
 #Start Neural Network
 model = Sequential()
 
-model.add(LSTM(D, activation=('tanh'), dropout=0.2, recurrent_dropout=0.2, stateful = False, input_shape = input_shape))
-
-#model.add(Dense(50, activation=('relu'))) 
-#model.add(Dropout(dr))
-#
-#model.add(Dense(250, activation=('relu'))) 
-#model.add(Dropout(dr))
-#
-#model.add(Dense(img_rows)) 
-#model.add(Dropout(dr))
+model.add(GRU(D,  activation=('tanh'), dropout=0.2, recurrent_dropout=0.2, stateful = False, input_shape = input_shape))
 
 model.compile(loss=keras.losses.mean_squared_error, optimizer='rmsprop')
 
