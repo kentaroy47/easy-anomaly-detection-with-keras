@@ -1,3 +1,4 @@
+![anomal](https://cdn-images-1.medium.com/max/1600/1*ZlN46eNWkRtkAS4qOjrJYA.png)
 # anomaly-detection-with-keras
 Lets do anomaly detection with keras!
 
@@ -23,7 +24,8 @@ python anomaly_withGRU.py
 ```
 
 ### files
-https://github.com/kentaroy47/anomaly-detection-with-keras/blob/master/norm.JPG?raw=true
+![anomal](https://github.com/kentaroy47/anomaly-detection-with-keras/blob/master/norm.JPG)
+
 normal.csv includes artificial waveform that is used for training.
 The NN will think that this is the normal state.
 WIth an Autoencoder, the NN is trained to reproduce this state.
