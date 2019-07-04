@@ -15,7 +15,9 @@ git clone https://github.com/kentaroy47/anomaly-detection-with-keras.git
 ```
 
 # how anomaly detection works.
+## data and model setups
 ![anomal](https://github.com/kentaroy47/anomaly-detection-with-keras/blob/master/figs/norm.JPG)
+
 we split the long train data and test data into sequences which has 400 data samples each.
 
 our keras model is trained with tons of *normal* data, and trained to predict how the *next* sequence looks like.
@@ -24,11 +26,13 @@ our keras model is trained with tons of *normal* data, and trained to predict ho
 
 by training an autoencoder, DNNs do well learning and generating data. (the training data is toy data and is very easy!)
 
-BTW. We trained this model by
+BTW. We trained this model by:
+
 ```
 python anomaly_withFC.py --epoch 100
 ```
 
+## anomaly detection
 ![results](https://github.com/kentaroy47/anomaly-detection-with-keras/blob/master/figs/FC_waveforms.png)
 
 Let's see the how the model behaves with normal and anomaly data.
@@ -47,6 +51,7 @@ by looking at this, **we can find when and how long anomaly events have occured.
 
 ![results](https://github.com/kentaroy47/anomaly-detection-with-keras/blob/master/figs/FC_anomaly_score.png)
 
+# running the training scripts
 ## for fully connected cells..
 全結合ネットワークでやる場合。。
 ```
