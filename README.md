@@ -14,6 +14,25 @@ clone the repo.
 git clone https://github.com/kentaroy47/anomaly-detection-with-keras.git
 ```
 
+# how anomaly detection works.
+we split the long train data and test data into sequences which has 400 data samples each.
+
+our keras model is trained with tons of *normal* data, and trained to predict how the *next* sequence looks like.
+
+![results](https://github.com/kentaroy47/anomaly-detection-with-keras/blob/master/FC_waveforms.png)
+
+Let's see the model prediction results and the real data.
+
+If the model results and the real data has no contradictions (data 0~2000), the state is normal!
+
+if the model results and the real data have large differences (data 2500-), the input data is clearly different from the normal trained data. The model cannot predict the next state, and we define that it is likely to be an anomaly state.
+
+we plot the anomaly score as bellow (which is the square difference between the predicted and real data)
+
+by looking at this, we can find when and how long anomaly events have occured.
+
+![results](https://github.com/kentaroy47/anomaly-detection-with-keras/blob/master/FC_anomaly_score.png)
+
 ## for fully connected cells..
 全結合ネットワークでやる場合。。
 ```
