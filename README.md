@@ -15,12 +15,12 @@ git clone https://github.com/kentaroy47/anomaly-detection-with-keras.git
 ```
 
 # how anomaly detection works.
-![anomal](https://github.com/kentaroy47/anomaly-detection-with-keras/blob/master/norm.JPG)
+![anomal](https://github.com/kentaroy47/anomaly-detection-with-keras/blob/master/figs/norm.JPG)
 we split the long train data and test data into sequences which has 400 data samples each.
 
 our keras model is trained with tons of *normal* data, and trained to predict how the *next* sequence looks like.
 
-![predict](https://github.com/kentaroy47/anomaly-detection-with-keras/blob/master/normal_waveform_predict.png)
+![predict](https://github.com/kentaroy47/anomaly-detection-with-keras/blob/master/figs/normal_waveform_predict.png)
 
 by training an autoencoder, DNNs do well learning and generating data. (the training data is toy data and is very easy!)
 
@@ -29,7 +29,7 @@ BTW. We trained this model by
 python anomaly_withFC.py --epoch 100
 ```
 
-![results](https://github.com/kentaroy47/anomaly-detection-with-keras/blob/master/FC_waveforms.png)
+![results](https://github.com/kentaroy47/anomaly-detection-with-keras/blob/master/figs/FC_waveforms.png)
 
 Let's see the how the model behaves with normal and anomaly data.
 
@@ -45,7 +45,7 @@ we plot the anomaly score as bellow (which is the square difference between the 
 
 by looking at this, **we can find when and how long anomaly events have occured.**
 
-![results](https://github.com/kentaroy47/anomaly-detection-with-keras/blob/master/FC_anomaly_score.png)
+![results](https://github.com/kentaroy47/anomaly-detection-with-keras/blob/master/figs/FC_anomaly_score.png)
 
 ## for fully connected cells..
 全結合ネットワークでやる場合。。

@@ -163,7 +163,7 @@ plt.plot(Loss_keras_processed, label='FC model score')
 plt.legend()
 plt.show()
 
-fig1.savefig('FC_anomaly_score.png')
+fig1.savefig('figs/FC_anomaly_score.png')
 
 fig2 = plt.figure()
 plt.xlabel("sample")
@@ -173,7 +173,7 @@ plt.plot(measured[157500:163000], label='real data')
 plt.legend()
 plt.show()
 
-fig2.savefig("FC_waveforms.png")
+fig2.savefig("figs/FC_waveforms.png")
 
 fig3 = plt.figure()
 plt.xlabel("sample")
@@ -183,7 +183,7 @@ plt.plot(predicted[0:3000], label='keras FC model prediction')
 plt.legend()
 plt.show()
 
-fig3.savefig("normal_waveform_predict.png")
+fig3.savefig("figs/normal_waveform_predict.png")
 
-model.save("anormaly_FC.h5")
+model.save("models/anormaly_FC.h5")
 print("Saved model to disk")
