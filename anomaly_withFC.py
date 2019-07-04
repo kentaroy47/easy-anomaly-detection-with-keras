@@ -4,7 +4,10 @@ import math
 import sys
 import time
 import copy
+import matplotlib
 import matplotlib.pylab as plt
+#matplotlib.use('Agg') # for AWS
+
 import keras
 from keras.models import Sequential, Model
 from keras.layers import Dense, Dropout, Flatten, Activation, BatchNormalization
@@ -15,6 +18,7 @@ from keras.callbacks import ModelCheckpoint
 import numpy as np
 from numpy .random import multivariate_normal, permutation
 
+### model options ###
 parser = argparse.ArgumentParser()
 parser.add_argument('--epoch', '-e', default=10, type=int,
                     help='number of epochs to learn')
@@ -148,24 +152,28 @@ Loss_keras_processed = Loss_keras[0:Loss_keras.size-mean_window]
 # smoothen anomaly score
 for x in range(Loss_keras.size-mean_window):
     Loss_keras_processed[x] = np.mean(Loss_keras[x:x+mean_window])
-#normalize
+# normalize the score
 Loss_keras_processed = Loss_keras_processed/(np.std(Loss_keras_processed))
     
 ##### plot results #####
 fig1 = plt.figure()
 plt.xlabel("sample")
-plt.ylabel("anomal score")
-plt.plot(Loss_keras_processed, label='32FP results')
+plt.ylabel("anomaly score")
+plt.plot(Loss_keras_processed, label='FC model score')
 plt.legend()
 plt.show()
 
-#fig2 = plt.figure()
-#plt.xlabel("sample")
-#plt.ylabel("value")
-#plt.plot(predicted[155500:165000], label='predicts')
-#plt.plot(measured[155500:165000], label='measured')
-#plt.legend()
-#plt.show()
+fig1.savefig('FC_anomaly_score.png')
+
+fig2 = plt.figure()
+plt.xlabel("sample")
+plt.ylabel("value")
+plt.plot(predicted[157500:163000], label='keras FC model prediction')
+plt.plot(measured[157500:163000], label='real data')
+plt.legend()
+plt.show()
+
+fig2.savefig("FC_waveforms.png")
 
 model.save("anormaly_FC.h5")
 print("Saved model to disk")
