@@ -45,15 +45,21 @@ x_test_data=np.loadtxt(test_name,delimiter=',')
 x_train_data = x_train_data/(np.std(x_train_data))
 x_test_data = x_test_data/(np.std(x_test_data))
 
-#split
-x_train_data=x_train_data.reshape([x_train_data.shape[0],x_train_data.size/x_train_data.shape[0]])
-x_test_data=x_test_data.reshape([x_test_data.shape[0],x_test_data.size/x_test_data.shape[0]])
+"""
+split train data and test data into D length sequences.
+the keras model will try to predict the *next* D length sequence.
+if the model results and the real data has no contradictions, the state is non-anomaly (or nomal)
+if the model results and the real data have large differences, it is likely to be an anomaly state.
+# 2019/07/04 fixed to remove divide errors.
+"""
+x_train_data = x_train_data.reshape([x_train_data.shape[0], 1]) #x_train_data.size/x_train_data.shape[0]])
+x_test_data = x_test_data.reshape([x_test_data.shape[0], 1]) #x_test_data.size/x_test_data.shape[0]])
 
-Split_train_data=x_train_data.reshape([x_train_data.shape[0]/D,x_train_data.shape[1]*D])
-Split_test_data=x_test_data.reshape([x_test_data.shape[0]/D,x_test_data.shape[1]*D])
+print("x_train data", x_train_data.shape)
+print("x_test data", x_test_data.shape)
 
-Split_train_data_x=Split_train_data[0:-1,:]
-Split_train_data_y=Split_train_data[1::,:]
+Split_train_data = x_train_data.reshape([int(x_train_data.shape[0]/D), x_train_data.shape[1]*D])
+Split_test_data=x_test_data.reshape([int(x_test_data.shape[0]/D), x_test_data.shape[1]*D])
 
 Split_test_data_x=Split_test_data[0:-1,:]
 Split_test_data_y=Split_test_data[1::,:]
@@ -61,6 +67,7 @@ Split_test_data_y=Split_test_data[1::,:]
 img_rows = D
 Split_test_data = Split_test_data.reshape(Split_test_data.shape[0], img_rows, 1)
 Split_train_data = Split_train_data.reshape(Split_train_data.shape[0], img_rows, 1)
+# make labels
 Split_test_data_y = Split_test_data.reshape(Split_test_data.shape[0], img_rows)
 Split_train_data_y = Split_train_data.reshape(Split_train_data.shape[0], img_rows)
 
