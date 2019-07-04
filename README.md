@@ -3,13 +3,15 @@
 
 Learn from the basics of anomaly detection. How it works and analyze.
 
+- **Train real Deep Learning Models**
+
+Learn to construct time-series models with fully connected or LSTMs or GRU cells.
+
 - **It's Easy**
 
 It's written with Keras, easy to understand.
 
-- **It's Deep Learning**
 
-Learn to construct time-series models with fully connected or LSTMs or GRU cells.
 
 
 Kerasを使って異常検知をしてみましょう！
