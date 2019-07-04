@@ -31,13 +31,15 @@ python anomaly_withFC.py --epoch 100
 
 ![results](https://github.com/kentaroy47/anomaly-detection-with-keras/blob/master/FC_waveforms.png)
 
-Let's see the model prediction results and the real data.
+Let's see the how the model behaves with normal and anomaly data.
 
-If the **model results and the real data has no contradictions (data 0~2000), the state is normal!**
+The data 0-2500 is normal similar to the trained state, and 2500~ is anomaly (with large amplitudes.).
 
-if the model results and the real data **have large differences (data 2500-), the input data is clearly different from the normal trained data.** 
+The **model results and the real data has no contradictions (data 0~2500), if the state is normal.**
 
-The model cannot predict the next state, and we define that it is likely to be an anomaly state.
+The model results and the real data **have large differences (data 2500-), the input data is clearly different from the normal trained data.** 
+
+When the model cannot predict the next state, and we define that it is likely to be an anomaly state.
 
 we plot the anomaly score as bellow (which is the square difference between the predicted and real data)
 
