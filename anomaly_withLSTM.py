@@ -18,9 +18,9 @@ parser.add_argument('--epoch', '-e', default=10, type=int,
                     help='number of epochs to learn')
 parser.add_argument('--batchsize', '-b', type=int, default=128,
                     help='learning minibatch size')
-parser.add_argument('--train_file_name', '-train_name', type=str, default='./normal.csv',
+parser.add_argument('--train_file_name', '-train_name', type=str, default='./data/normal.csv',
                     help='the file name of the training data set') 
-parser.add_argument('--test_file_name', '-test_name', type=str, default='./abn.csv',
+parser.add_argument('--test_file_name', '-test_name', type=str, default='./data/abn.csv',
                     help='the file name of the test data set')
 parser.add_argument('--window_size', '-ws', type=int, default=400,
                     help='window size')
