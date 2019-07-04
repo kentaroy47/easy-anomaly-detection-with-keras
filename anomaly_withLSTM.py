@@ -46,11 +46,11 @@ x_train_data = x_train_data/(np.std(x_train_data))
 x_test_data = x_test_data/(np.std(x_test_data))
 
 #split
-x_train_data=x_train_data.reshape([x_train_data.shape[0],x_train_data.size/x_train_data.shape[0]])
-x_test_data=x_test_data.reshape([x_test_data.shape[0],x_test_data.size/x_test_data.shape[0]])
+x_train_data=x_train_data.reshape([x_train_data.shape[0], int(x_train_data.size/x_train_data.shape[0])])
+x_test_data=x_test_data.reshape([x_test_data.shape[0], int(x_test_data.size/x_test_data.shape[0])])
 
-Split_train_data=x_train_data.reshape([x_train_data.shape[0]/D,x_train_data.shape[1]*D])
-Split_test_data=x_test_data.reshape([x_test_data.shape[0]/D,x_test_data.shape[1]*D])
+Split_train_data=x_train_data.reshape([int(x_train_data.shape[0]/D), x_train_data.shape[1]*D])
+Split_test_data=x_test_data.reshape([int(x_test_data.shape[0]/D), x_test_data.shape[1]*D])
 
 Split_train_data_x=Split_train_data[0:-1,:]
 Split_train_data_y=Split_train_data[1::,:]
