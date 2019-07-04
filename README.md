@@ -1,7 +1,21 @@
-![anomal](https://cdn-images-1.medium.com/max/1600/1*ZlN46eNWkRtkAS4qOjrJYA.png)
-# anomaly-detection-with-keras
-Lets do anomaly detection with keras!
+# What is this repo?
+- **It's Simple**
+
+Learn from the basics of anomaly detection. How it works and analyze.
+
+- **It's Easy**
+
+It's written with Keras, easy to understand.
+
+- **It's Deep Learning**
+
+Learn to construct time-series models with fully connected or LSTMs or GRU cells.
+
+
 Kerasを使って異常検知をしてみましょう！
+
+
+
 
 ## Qiitaの解説記事
 TBD
