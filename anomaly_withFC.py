@@ -20,7 +20,7 @@ from numpy .random import multivariate_normal, permutation
 
 ### model options ###
 parser = argparse.ArgumentParser()
-parser.add_argument('--epoch', '-e', default=10, type=int,
+parser.add_argument('--epoch', '-e', default=30, type=int,
                     help='number of epochs to learn')
 parser.add_argument('--batchsize', '-b', type=int, default=128,
                     help='learning minibatch size')
@@ -174,6 +174,16 @@ plt.legend()
 plt.show()
 
 fig2.savefig("FC_waveforms.png")
+
+fig3 = plt.figure()
+plt.xlabel("sample")
+plt.ylabel("value")
+plt.plot(measured[0:3000], label='real data')
+plt.plot(predicted[0:3000], label='keras FC model prediction')
+plt.legend()
+plt.show()
+
+fig3.savefig("normal_waveform_predict.png")
 
 model.save("anormaly_FC.h5")
 print("Saved model to disk")
