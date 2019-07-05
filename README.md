@@ -11,16 +11,7 @@ Learn to construct time-series models with fully connected or LSTMs or GRU cells
 
 It's written with Keras, easy to understand.
 
-
-
-
-Kerasを使って異常検知をしてみましょう！
-
-
-
-
-## Qiitaの解説記事
-TBD
+**Kerasを使って異常検知をしてみましょう！**
 
 # to get started
 clone the repo.
