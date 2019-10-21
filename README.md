@@ -11,7 +11,7 @@ Learn to construct time-series models with fully connected or LSTMs or GRU cells
 
 It's written with Keras, easy to understand.
 
-![pytorch version](https://github.com/kentaroy47/AnomalyDetection.pytorch)
+[Pytorch version of this repo is here](https://github.com/kentaroy47/AnomalyDetection.pytorch)
 
 **Kerasを使って異常検知をしてみましょう！**
 
